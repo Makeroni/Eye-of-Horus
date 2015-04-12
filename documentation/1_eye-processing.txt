@@ -1,0 +1,40 @@
+Enable mouse control from php
+
+0.- Tutorial
+https://gist.github.com/x8core/7a1ea039e1ccc167ac6c
+
+1.- see available devices
+from console
+w
+
+2.- If another user is to do the mousemove, you need to grant him access to your display.
+xhost +si:localuser:the-user
+
+3.- shell_exec('export DISPLAY=:0.0; xdotool mousemove 20 20;')
+
+STEPS
+link to glasses wifi
+
+enter by ssh
+ssh root@192.168.61.1
+
+Start the image streaming
+mjpg_streamer -i "input_uvc.so -n -y -r QVGA -f 30 -d /dev/video0" -o "output_http.so -p 8080 -n -w /www/webcam"
+
+
+Check that is emitting
+http://192.168.61.1:8080/?action=snapshot
+
+PHP Proxy test
+http://localhost/eye-of-horus/src/eye_int/php/proxy.php
+
+Test (offline jscript)
+http://localhost/eye-of-horus/src/eye_int/test.html
+params
+level1 (0-255)
+level2 (0-255)
+size1 (0-100)
+size2 (0-5000)
+
+Main page
+http://localhost/eye-of-horus/src/eye_int

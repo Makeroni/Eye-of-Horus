@@ -1,0 +1,40 @@
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+.logo {
+    max-height: 30px;
+    margin: 10px;
+}
+
+.logo_title{
+    font-size: 30px;
+    color: #ffe508;
+}
+.page_title{
+    color: #888888;
+    border-bottom: 2px solid #ffe508;
+}
+.label{
+    font-size: 20px;
+}
+
+.coordinates{
+    font-size: 120%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
