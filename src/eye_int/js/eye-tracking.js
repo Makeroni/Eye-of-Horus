@@ -1,36 +1,140 @@
+/*
+* JavaScript eye tracking library developed
+* during the NASA Space Apps Challenge
+* https://github.com/Makeroni/Eye-of-Horus
+*
+* Copyright 2015, Borja Latorre
+* Copyright 2015, Jose Luis Berocal
+*
+* Licensed under the GNU GPL version 3.0
+* http://opensource.org/licenses/GPL-3.0
+*/
 
-var level1 = 30;
-var level2 = 50;
-var size1 =  500;
-var size2 = 3000;
-var imgn = 8;
-var matrix = new Array(320 * 240);
+// Image analysis parameters
+var pupilMinLuminance =   45;
+var pupilMaxLuminance =   50;
+var pupilMinSize      =  400;
+var pupilMaxSize      = 3000;
 
-var col_r = new Array(200);
-var col_g = new Array(200);
-var col_b = new Array(200);
+// Pupil mobility area
+var pupilP1x =   0, pupilP1y =   0;
+var pupilP2x = 320, pupilP2y =   0;
+var pupilP3x = 320, pupilP3y = 240;
+var pupilP4x =   0, pupilP4y = 240;
 
-col_r[0] = 255;
-col_g[0] = 255;
-col_b[0] = 255;
-col_r[1] = 0;
-col_g[1] = 0;
-col_b[1] = 0;
-col_r[2] = 255;
-col_g[2] = 255;
-col_b[2] = 255;
-for (var i = 3; i < 200 ; i++)
+/*
+* Segmentation enumerating all compact groups
+*
+* Input matrix must contain the following values:
+*   0: void
+*   1: group kernel
+*   2: group boundary (optional)
+*
+*  Groups are numbered from 3 as shown bellow:
+*
+*   | 1 2 0 0 1 |       | 3 3 0 0 4 |
+*   | 0 0 0 0 1 |       | 0 0 0 0 4 |
+*   | 0 2 1 0 1 |  -->  | 0 5 5 0 4 |
+*   | 0 2 2 0 0 |       | 0 5 5 0 0 |
+*   | 0 0 0 0 2 |       | 0 0 0 0 0 |
+* 
+*/
+
+function segmentation(matrix, w, h)
 {
-	col_r[i] = Math.floor(Math.random() * 256);
-	col_g[i] = Math.floor(Math.random() * 192);
-	col_b[i] = Math.floor(Math.random() * 256);
+	// First group has id 3 as lower vales are reseved
+	var id = 3, k = 0;
+
+	// Matrix elements
+	var n = w * h;
+
+	// Array to store groups size
+	var groupSize = new Array(256);
+
+	// Read matrix
+	for (var j = 0; j < h ; j++)
+	{
+		for (var i = 0; i < w ; i++)
+		{
+			// If a kernel is found
+			if(matrix[k++] == 1)
+			{
+				// Grow the group and store its size
+				groupSize[id] = morfologyGrow(matrix, w, h, i, j, id);
+				id++;
+			}
+		}
+	}
+
+	// Locate the pupil among the found groups
+	var pupilId = 0, pupilSize;
+	for (var i = 3; i <= id ; i++)
+	{
+		if(groupSize[i] > pupilMinSize && groupSize[i] < pupilMaxSize)
+		{
+			pupilId = i;
+		}
+	}
+
+	// Compute the pupil center of mass
+	var cx = 0, cy = 0;
+	if(pupilId > 0)
+	{
+		pupilSize = groupSize[pupilId];
+
+		k = 0;
+		for (var j = 0; j < h ; j++)
+		{
+			for (var i = 0; i < w ; i++)
+			{
+				if(matrix[k++] == pupilId)
+				{
+					cx = cx + i;
+					cy = cy + j;
+				}
+			}
+		}
+		cx = cx / pupilSize;
+		cy = cy / pupilSize;
+
+		pupilPx = cx / 320;
+		pupilPy = cy / 240;
+
+		if(captureMouse)
+		{
+			$.get('php/xdotool.php?x=' + 
+				parseFloat(pupilPx).toFixed(3) + '&y=' +
+				parseFloat(pupilPy).toFixed(3), null);
+		}
+
+		// Update UI
+		$("#cx").text('x: ' + parseFloat(pupilPx).toFixed(3));
+		$("#cy").text('y: ' + parseFloat(pupilPy).toFixed(3));
+		$("#size").text('size: ' + pupilSize);
+
+		// Mark a cross in the pupil center
+		cx = parseInt(cx);
+		cy = parseInt(cy);
+		for (var i = 1; i < 4 ; i++)
+		{
+			matrix[cx + (cy + i) * w] = 1;
+			matrix[cx + (cy - i) * w] = 1;
+			matrix[cx + i + cy * w] = 1;
+			matrix[cx - i + cy * w] = 1;
+		}
+
+		return 1;
+	}
+
+	return 0;
 }
 
-function grow(matrix, w, h, i, j, id)
+// Grow group from a kernel and mark with id
+function morfologyGrow(matrix, w, h, i, j, id)
 {
 	var x, y, p1, p2;
 
-	// Add the fist item to the list
+	// Add the first element to the list
 	p1 = i + j * w;
 	var list = [p1];
 	var size = 1;
@@ -41,12 +145,13 @@ function grow(matrix, w, h, i, j, id)
 
 	while( size > next )
 	{
-		// Process the first item
+		// Process the current element
 		p1 = list[next];
 		y = Math.floor(p1 / w);
 		x = Math.floor(p1 - y * w);
 
 		// Add not explored neighbors to the list
+		// Try left
 		p2 = p1 - w;
 		if( matrix[p2] == 1 || matrix[p2] == 2 )
 		{
@@ -54,6 +159,7 @@ function grow(matrix, w, h, i, j, id)
 			size++;
 			matrix[p2] = id;
 		}
+		// Try right
 		p2 = p1 + w;
 		if( matrix[p2] == 1 || matrix[p2] == 2 )
 		{
@@ -61,6 +167,7 @@ function grow(matrix, w, h, i, j, id)
 			size++;
 			matrix[p2] = id;
 		}
+		// Try down
 		p2 = p1 - 1;
 		if( matrix[p2] == 1 || matrix[p2] == 2 )
 		{
@@ -68,6 +175,7 @@ function grow(matrix, w, h, i, j, id)
 			size++;
 			matrix[p2] = id;
 		}
+		// Try up
 		p2 = p1 + 1;
 		if( matrix[p2] == 1 || matrix[p2] == 2 )
 		{
@@ -76,87 +184,28 @@ function grow(matrix, w, h, i, j, id)
 			matrix[p2] = id;
 		}
 
-		// Parse next element of the list
+		// Parse next element
 		next++;
 	}
 
+	// Return group size
 	return size;
 }
 
-function segment(matrix, w, h)
+// Global counter for offline analysis
+var offlineFrame = 12;
+
+// Analyze a video stream for eye tracking
+function processStream()
 {
-	var id = 3, k = 0;
-	var n = w * h;
-	var size = new Array(256);
-	for (var j = 0; j < h ; j++)
-	{
-		for (var i = 0; i < w ; i++)
-		{
-			if(matrix[k++] == 1)
-			{
-				size[id] = grow(matrix, w, h, i, j, id);
-				id++;
-			}
-		}
-	}
-	var maxsize = 0, maxid;
-	for (var i = 3; i <= id ; i++)
-	{
-		if(size[i] > maxsize && maxsize < size2)
-		{
-			maxsize = size[i];
-			maxid = i;
-		}
-	}
-	if(maxsize > size1)
-	{
-		var cx=0, cy=0;
-		k = 0;
-		for (var j = 0; j < h ; j++)
-		{
-			for (var i = 0; i < w ; i++)
-			{
-				if(matrix[k++] == maxid)
-				{
-					cx = cx + i;
-					cy = cy + j;
-				}
-			}
-		}
-		cx = cx / maxsize;
-		cy = cy / maxsize;
-		$("#cx").text('pos-x: '+parseInt(cx));
-		$("#cy").text('pos-y: '+parseInt(cy));
-		$("#size").text('size: '+maxsize);
-		matrix[parseInt(cx+1)+parseInt(cy) * w] = 1;
-		matrix[parseInt(cx-1)+parseInt(cy) * w] = 1;
-		matrix[parseInt(cx)+parseInt(cy+1) * w] = 1;
-		matrix[parseInt(cx)+parseInt(cy-1) * w] = 1;
-		matrix[parseInt(cx+1)+parseInt(cy+1) * w] = 1;
-		matrix[parseInt(cx-1)+parseInt(cy-1) * w] = 1;
-		matrix[parseInt(cx-1)+parseInt(cy+1) * w] = 1;
-		matrix[parseInt(cx+1)+parseInt(cy-1) * w] = 1;
-	}
-}
+	// Image luminance matrix
+	var luminanceMatrix = new Array(320 * 240);
 
-function processImage()
-{
-
-	imgn = imgn + 0.1;
-	if(imgn>=56){imgn=8;}
-
-	// Get canvas element
-	var elem = document.getElementById('myCanvas');
-	if (!elem || !elem.getContext)
-	{
-		//return;
-	}
+	// Get the canvas element
+	var elem = document.getElementById('eyeCanvas');
 
 	// Get canvas 2d context
 	var context = elem.getContext('2d');
-	if (!context || !context.getImageData || !context.putImageData || !context.drawImage) {
-		//return;
-	}
 
 	// Create new image
 	var img = new Image();
@@ -168,69 +217,120 @@ function processImage()
 		// Draw the image on canvas
 		context.drawImage(this, x, y);
 
-		// Get the pixels
+		// Read the pixel values
 		var imgd = context.getImageData(x, y, this.width, this.height);
 		var pix = imgd.data;
-		var grey;
+		var luminance;
 
-		// Compute threshold
+		// Threshold luminance
 		for (var i = 0, j = 0, n = pix.length; i < n; i += 4, j++)
 		{
-			grey = (pix[i] + pix[i+1] + pix[i+2]) / 3;
-			if(grey < level1)
+			luminance = ( pix[i] + pix[i+1] + pix[i+2] ) / 3;
+			if(luminance < pupilMinLuminance)
 			{
-				matrix[j] = 1;
+				luminanceMatrix[j] = 1;
 			}
-			else if(grey < level2)
+			else if(luminance < pupilMaxLuminance)
 			{
-				matrix[j] = 2;
+				luminanceMatrix[j] = 2;
 			}
 			else
 			{
-				matrix[j] = 0;
+				luminanceMatrix[j] = 0;
 			}
 		}
 
-		// Clean border
+		// Clear matrix border to avoid overflows
 		for (var i = 0, n = this.width * this.height; i < this.width; i++)
 		{
-			matrix[i] = 0;
-			matrix[n-1-i] = 0;
+			luminanceMatrix[i] = 0;
+			luminanceMatrix[n-1-i] = 0;
 		}
 		for (var i = 0; i < this.height; i++)
 		{
-			matrix[i *  this.width] = 0
-			matrix[(i + 1) * this.width - 1] = 0;
+			luminanceMatrix[i *  this.width] = 0
+			luminanceMatrix[(i + 1) * this.width - 1] = 0;
 		}
 
-		segment(matrix, this.width, this.height);
-
-		// Draw groups
-		for (var i = 0, j = 0, n = pix.length; i < n; i += 4, j++)
+		// Segment matrix
+		if(segmentation(luminanceMatrix, this.width, this.height))
 		{
-			pix[i+0] = col_r[matrix[j]];
-			pix[i+1] = col_g[matrix[j]];
-			pix[i+2] = col_b[matrix[j]];
+			// Colorize groups
+			for (var i = 0, j = 0, n = pix.length; i < n; i += 4, j++)
+			{
+				// Mark detected groups with blue
+				if(luminanceMatrix[j] > 1)
+				{
+					pix[i+0] = 255;
+					pix[i+1] =   0;
+					pix[i+2] =   0;
+					pix[i+3] =  64;
+				}
+				// Mark pupil center with green
+				else if(luminanceMatrix[j] == 1)
+				{
+					pix[i+0] =   0;
+					pix[i+1] = 255;
+					pix[i+2] =   0;
+					pix[i+3] = 255;
+				}
+				// The rest is transparent
+				else
+				{
+					pix[i+0] = 255;
+					pix[i+1] = 255;
+					pix[i+2] = 255;
+					pix[i+3] =   0;
+				}
+			}
+
+			// Draw the ImageData object.
+			context.putImageData(imgd, x, y);
 		}
 
-		// Draw the ImageData object.
-		context.putImageData(imgd, x, y);
+		// Process next frame in offline analysis
+		if(!onlineMode)
+		{
+			offlineFrame = offlineFrame + 0.1;
+			if(offlineFrame > 45)
+			{
+				offlineFrame = 0;
+			}
+		}
 
-		setTimeout(processImage, 1);
+		// Main loop without blocking the UI
+		setTimeout(processStream, 1);
 
 	}, false);
 
-	//Test mode
-    img.src = 'img/test-'+parseInt(imgn)+'.jpg';
-    $("#img").attr("src", 'img/test-'+parseInt(imgn)+'.jpg');
-    //Live mode
-	//var rnd = Math.random();
-	//img.src = 'php/proxy.php?'+rnd;
-	//$("#img").attr("src", 'php/proxy.php?'+rnd);
+ 	// Video stream source in online mode
+	if(onlineMode)
+	{
+		var rnd = Math.random();
+		img.src = 'php/proxy.php?' + rnd;
+		$("#eyeImg").attr("src", 'php/proxy.php?' + rnd);
+	}
+	// Video stream source in offline mode
+	else
+	{
+	    img.src = 'img/offline-frame-' + parseInt(offlineFrame) + '.jpg';
+	    $("#eyeImg").attr("src", 'img/offline-frame-' + parseInt(offlineFrame) + '.jpg');
+	}
+
 }
 
+// Pupil position
+var pupilPx, pupilPy;
+
+// Online mode
+var onlineMode = 0;
+
+// Capture mouse
+var captureMouse = 0;
+
+// Start processing once the page is loaded
 window.addEventListener('load', function ()
 {
-	setTimeout(processImage, 1);
+	setTimeout(processStream, 1);
 });
 

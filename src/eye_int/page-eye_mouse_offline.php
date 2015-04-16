@@ -1,17 +1,17 @@
 <div class="row">
     <div class="col-md-12">
-        <h3 class="page_title">EYE INTERFACE CALIBRATION</h3>
+        <h3 class="page_title">Eye tracking calibration</h3>
     </div>
 </div>
 <div class="row">
     <div class="col-md-4">
-        <img id="img" width="320" height="240" src="img/test-8.jpg">
+		<div style="position:relative;height:240px;">
+	        <img id="eyeImg" width="320" height="240" src="img/test-8.jpg" style="position:absolute; top:10px; left:10px;">
+	        <canvas id="eyeCanvas" width="320" height="240" style="position:absolute; top:10px; left:10px;"></canvas>
+		</div>
     </div>
     <div class="col-md-4">
-        <canvas id="myCanvas" width="320" height="240"></canvas>
-    </div>
-    <div class="col-md-4">
-        <span class="label label-primary">DETECTED COORDINATES</span>
+        <span class="label label-primary">Pupil coordinates</span>
         <br><br>
 
         <div class="coordinates">
@@ -30,22 +30,22 @@
 <hr>
 <div class="row">
     <div class="col-md-4 settings">
-        <span class="label label-primary">SETTINGS</span>
+        <span class="label label-primary">Parameters</span>
         <br><br>
-        <span>Luminosity Min</span>
-        <input type="range" id="level1" value="30" min="0" max="255">
+        <span>Min Luminance</span>
+        <input type="range" id="level1" value="45" min="0" max="127">
         <br>
-        <span>Luminosity Max</span>
-        <input type="range" id="level2" value="50" min="0" max="255">
+        <span>Max Luminance</span>
+        <input type="range" id="level2" value="50" min="0" max="127">
         <br>
-        <span>Size Max</span>
-        <input type="range" id="size1"  value="500" min="0" max="1000">
+        <span>Min Size</span>
+        <input type="range" id="size1"  value="400" min="0" max="1000">
         <br>
-        <span>Size Min</span>
+        <span>Max Size</span>
         <input type="range" id="size2" value="3000" min="0" max="5000">
     </div>
     <div class="col-md-4">
-        <span class="label label-primary">SET WORKING AREA</span>
+        <span class="label label-primary">Mobility area</span>
         <br><br>
         <input type="button" class="btn btn-info" value="c1" id="c1">
         <input type="button" class="btn btn-info" value="c2" id="c2"></br></br>
@@ -54,9 +54,13 @@
         <br><br>
     </div>
     <div class="col-md-4">
-        <span class="label label-primary">SYSTEM ENABLE</span>
+        <span class="label label-primary">Online mode</span>
         <br><br>
-        <input type="checkbox" id="start_button">
+        <input type="checkbox" id="onlineMode">
+        <br><br>
+        <span class="label label-primary">Capture mouse</span>
+        <br><br>
+        <input type="checkbox" id="captureMouse">
         <br><br>
     </div>
 </div>
