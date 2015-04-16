@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE eagle SYSTEM "eagle.dtd">
+<eagle version="6.6.0">
+<drawing>
+<settings>
+<setting alwaysvectorfont="no"/>
+<setting verticaltext="up"/>
+</settings>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<layers>
+<layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
+<layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
+<layer number="17" name="Pads" color="2" fill="1" visible="yes" active="yes"/>
+<layer number="18" name="Vias" color="2" fill="1" visible="yes" active="yes"/>
+<layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="yes"/>
+<layer number="20" name="Dimension" color="15" fill="1" visible="yes" active="yes"/>
+<layer number="21" name="tPlace" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="22" name="bPlace" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="23" name="tOrigins" color="15" fill="1" visible="yes" active="yes"/>
+<layer number="24" name="bOrigins" color="15" fill="1" visible="yes" active="yes"/>
+<layer number="25" name="tNames" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="26" name="bNames" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="27" name="tValues" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="28" name="bValues" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="29" name="tStop" color="7" fill="3" visible="no" active="yes"/>
+<layer number="30" name="bStop" color="7" fill="6" visible="no" active="yes"/>
+<layer number="31" name="tCream" color="7" fill="4" visible="no" active="yes"/>
+<layer number="32" name="bCream" color="7" fill="5" visible="no" active="yes"/>
+<layer number="33" name="tFinish" color="6" fill="3" visible="no" active="yes"/>
+<layer number="34" name="bFinish" color="6" fill="6" visible="no" active="yes"/>
+<layer number="35" name="tGlue" color="7" fill="4" visible="no" active="yes"/>
+<layer number="36" name="bGlue" color="7" fill="5" visible="no" active="yes"/>
+<layer number="37" name="tTest" color="7" fill="1" visible="no" active="yes"/>
+<layer number="38" name="bTest" color="7" fill="1" visible="no" active="yes"/>
+<layer number="39" name="tKeepout" color="4" fill="11" visible="yes" active="yes"/>
+<layer number="40" name="bKeepout" color="1" fill="11" visible="yes" active="yes"/>
+<layer number="41" name="tRestrict" color="4" fill="10" visible="yes" active="yes"/>
+<layer number="42" name="bRestrict" color="1" fill="10" visible="yes" active="yes"/>
+<layer number="43" name="vRestrict" color="2" fill="10" visible="yes" active="yes"/>
+<layer number="44" name="Drills" color="7" fill="1" visible="no" active="yes"/>
+<layer number="45" name="Holes" color="7" fill="1" visible="no" active="yes"/>
+<layer number="46" name="Milling" color="3" fill="1" visible="no" active="yes"/>
+<layer number="47" name="Measures" color="7" fill="1" visible="no" active="yes"/>
+<layer number="48" name="Document" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="49" name="Reference" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="51" name="tDocu" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="52" name="bDocu" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="91" name="Nets" color="2" fill="1" visible="yes" active="yes"/>
+<layer number="92" name="Busses" color="1" fill="1" visible="yes" active="yes"/>
+<layer number="93" name="Pins" color="2" fill="1" visible="yes" active="yes"/>
+<layer number="94" name="Symbols" color="4" fill="1" visible="yes" active="yes"/>
+<layer number="95" name="Names" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="96" name="Values" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="97" name="Info" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="98" name="Guide" color="6" fill="1" visible="yes" active="yes"/>
+</layers>
+<library>
+<description>
+&lt;h3&gt;VoCore EAGLE library&lt;/h3&gt;
+&lt;a href="https://github.com/omerk/vocore-evk"&gt;https://github.com/omerk/vocore-evk&lt;/a&gt;
+</description>
+<packages>
+<package name="VOCORE_V10A">
+<wire x1="-12.5" y1="-12.5" x2="12.5" y2="-12.5" width="0.1524" layer="21"/>
+<wire x1="12.5" y1="-12.5" x2="12.5" y2="12.5" width="0.1524" layer="21"/>
+<wire x1="12.5" y1="12.5" x2="-12.5" y2="12.5" width="0.1524" layer="21"/>
+<wire x1="-12.5" y1="12.5" x2="-12.5" y2="6.296" width="0.1524" layer="21"/>
+<wire x1="-12.5" y1="6.296" x2="-12.5" y2="-12.5" width="0.1524" layer="21"/>
+<wire x1="-12.5" y1="6.296" x2="-5.388" y2="6.296" width="0.1524" layer="51" style="shortdash"/>
+<wire x1="-5.388" y1="6.296" x2="-5.388" y2="12.392" width="0.1524" layer="51" style="shortdash"/>
+<pad name="S1" x="-10.1378" y="-11.9412" drill="0.55" diameter="0.9058"/>
+<pad name="S2" x="-8.8678" y="-11.9412" drill="0.55" diameter="0.9058"/>
+<pad name="S3" x="-7.5978" y="-11.9412" drill="0.55" diameter="0.9058"/>
+<pad name="S4" x="-6.3278" y="-11.9412" drill="0.55" diameter="0.9058"/>
+<pad name="W13" x="-11.9158" y="-10.1632" drill="0.55" diameter="0.9058"/>
+<pad name="W12" x="-11.9158" y="-8.8932" drill="0.55" diameter="0.9058"/>
+<pad name="W11" x="-11.9158" y="-7.6232" drill="0.55" diameter="0.9058"/>
+<pad name="W10" x="-11.9158" y="-6.3532" drill="0.55" diameter="0.9058"/>
+<pad name="W9" x="-11.9158" y="-5.0832" drill="0.55" diameter="0.9058"/>
+<pad name="W8" x="-11.9158" y="-3.8132" drill="0.55" diameter="0.9058"/>
+<pad name="W7" x="-11.9158" y="-2.5432" drill="0.55" diameter="0.9058"/>
+<pad name="W6" x="-11.9158" y="-1.2732" drill="0.55" diameter="0.9058"/>
+<pad name="W5" x="-11.9158" y="-0.0032" drill="0.55" diameter="0.9058"/>
+<pad name="W4" x="-11.9158" y="1.2668" drill="0.55" diameter="0.9058"/>
+<pad name="W3" x="-11.9158" y="2.5368" drill="0.55" diameter="0.9058"/>
+<pad name="W2" x="-11.9158" y="3.8068" drill="0.55" diameter="0.9058"/>
+<pad name="W1" x="-11.9158" y="5.0768" drill="0.55" diameter="0.9058"/>
+<pad name="N2" x="-2.540659375" y="11.911940625" drill="0.55" diameter="0.9058"/>
+<pad name="N3" x="-1.2478" y="11.9094" drill="0.55" diameter="0.9058"/>
+<pad name="N4" x="0.0222" y="11.9094" drill="0.55" diameter="0.9058"/>
+<pad name="N1" x="-3.7878" y="11.9094" drill="0.55" diameter="0.9058"/>
+<pad name="S9" x="0.0222" y="-11.9412" drill="0.55" diameter="0.9058"/>
+<pad name="S5" x="-5.0578" y="-11.9412" drill="0.55" diameter="0.9058"/>
+<pad name="S6" x="-3.7878" y="-11.9412" drill="0.55" diameter="0.9058"/>
+<pad name="S7" x="-2.5178" y="-11.9412" drill="0.55" diameter="0.9058"/>
+<pad name="S8" x="-1.2478" y="-11.9412" drill="0.55" diameter="0.9058"/>
+<pad name="S12" x="3.8322" y="-11.9412" drill="0.55" diameter="0.9058"/>
+<pad name="S11" x="2.5622" y="-11.9412" drill="0.55" diameter="0.9058"/>
+<pad name="S10" x="1.2922" y="-11.9412" drill="0.55" diameter="0.9058"/>
+<pad name="S14" x="6.3722" y="-11.9412" drill="0.55" diameter="0.9058"/>
+<pad name="S13" x="5.1022" y="-11.9412" drill="0.55" diameter="0.9058"/>
+<pad name="N8" x="5.079340625" y="11.911940625" drill="0.55" diameter="0.9058"/>
+<pad name="N9" x="6.349340625" y="11.911940625" drill="0.55" diameter="0.9058"/>
+<pad name="N5" x="1.269340625" y="11.911940625" drill="0.55" diameter="0.9058"/>
+<pad name="N6" x="2.539340625" y="11.911940625" drill="0.55" diameter="0.9058"/>
+<pad name="N7" x="3.809340625" y="11.911940625" drill="0.55" diameter="0.9058"/>
+<pad name="N11" x="8.889340625" y="11.911940625" drill="0.55" diameter="0.9058"/>
+<pad name="N12" x="10.159340625" y="11.911940625" drill="0.55" diameter="0.9058"/>
+<pad name="N10" x="7.619340625" y="11.911940625" drill="0.55" diameter="0.9058"/>
+<pad name="S16" x="8.9122" y="-11.9412" drill="0.55" diameter="0.9058"/>
+<pad name="S18" x="11.4522" y="-11.9412" drill="0.55" diameter="0.9058"/>
+<pad name="S17" x="10.1822" y="-11.9412" drill="0.55" diameter="0.9058"/>
+<pad name="S15" x="7.6422" y="-11.9412" drill="0.55" diameter="0.9058"/>
+<text x="0" y="0" size="1.27" layer="25" align="center">&gt;NAME</text>
+</package>
+</packages>
+<symbols>
+<symbol name="VOCORE_V10A">
+<pin name="1V8_OUT" x="-40.64" y="12.7" length="middle" direction="pwr"/>
+<pin name="GP12/PCM_CLK" x="-40.64" y="10.16" length="middle"/>
+<pin name="GP09/I2S_SDO" x="-40.64" y="7.62" length="middle"/>
+<pin name="GP22/LED0" x="-40.64" y="5.08" length="middle"/>
+<pin name="GP08/I2S_WS" x="-40.64" y="2.54" length="middle"/>
+<pin name="GP23/LED1" x="-40.64" y="0" length="middle"/>
+<pin name="GP13/PCM_DRX" x="-40.64" y="-2.54" length="middle"/>
+<pin name="GP24/LED2" x="-40.64" y="-5.08" length="middle"/>
+<pin name="GP27/SPI_CS1" x="-40.64" y="-7.62" length="middle"/>
+<pin name="GP25/LED3" x="-40.64" y="-10.16" length="middle"/>
+<pin name="GP26/LED4" x="-40.64" y="-15.24" length="middle"/>
+<pin name="TXD2" x="-40.64" y="-17.78" length="middle"/>
+<pin name="VIN@1" x="0" y="25.4" length="middle" direction="pwr" rot="R270"/>
+<pin name="VIN@2" x="2.54" y="25.4" length="middle" direction="pwr" rot="R270"/>
+<pin name="GND@1" x="5.08" y="25.4" length="middle" direction="pwr" rot="R270"/>
+<pin name="GND@2" x="7.62" y="25.4" length="middle" direction="pwr" rot="R270"/>
+<pin name="GP17/JTAG_TDO" x="10.16" y="25.4" length="middle" rot="R270"/>
+<pin name="GP21/JTAG_TRST" x="12.7" y="25.4" length="middle" rot="R270"/>
+<pin name="GP20/JTAG_TCLK" x="15.24" y="25.4" length="middle" rot="R270"/>
+<pin name="GP19/JTAG_TMS" x="17.78" y="25.4" length="middle" rot="R270"/>
+<pin name="GP18JTAG_TDI" x="22.86" y="25.4" length="middle" rot="R270"/>
+<pin name="GP02/I2C_SDA" x="27.94" y="25.4" length="middle" rot="R270"/>
+<pin name="GP01/I2C_SCL" x="25.4" y="25.4" length="middle" rot="R270"/>
+<pin name="GP07/I2S_CLK" x="-12.7" y="-25.4" length="middle" rot="R90"/>
+<pin name="GP10/I2S_SDI" x="-10.16" y="-25.4" length="middle" rot="R90"/>
+<pin name="RXD2" x="-7.62" y="-25.4" length="middle" rot="R90"/>
+<pin name="GP11/PCM_FS" x="-5.08" y="-25.4" length="middle" rot="R90"/>
+<pin name="P0TN" x="-2.54" y="-25.4" length="middle" rot="R90"/>
+<pin name="P0TP" x="0" y="-25.4" length="middle" rot="R90"/>
+<pin name="P0RP" x="2.54" y="-25.4" length="middle" rot="R90"/>
+<pin name="P0RN" x="5.08" y="-25.4" length="middle" rot="R90"/>
+<pin name="P4TN" x="10.16" y="-25.4" length="middle" rot="R90"/>
+<pin name="P4TP" x="7.62" y="-25.4" length="middle" rot="R90"/>
+<pin name="P4RP" x="12.7" y="-25.4" length="middle" rot="R90"/>
+<pin name="P4RN" x="15.24" y="-25.4" length="middle" rot="R90"/>
+<pin name="3V3@1" x="17.78" y="-25.4" length="middle" rot="R90"/>
+<pin name="USB_M" x="22.86" y="-25.4" length="middle" rot="R90"/>
+<pin name="USB_P" x="25.4" y="-25.4" length="middle" rot="R90"/>
+<pin name="GP00" x="20.32" y="25.4" length="middle" rot="R270"/>
+<pin name="GND@4" x="27.94" y="-25.4" length="middle" direction="pwr" rot="R90"/>
+<pin name="GND@5" x="30.48" y="-25.4" length="middle" direction="pwr" rot="R90"/>
+<pin name="3V3@2" x="20.32" y="-25.4" length="middle" rot="R90"/>
+<pin name="GP14/PCM_DTX" x="-40.64" y="-12.7" length="middle"/>
+<wire x1="-35.56" y1="20.32" x2="35.56" y2="20.32" width="0.254" layer="94"/>
+<wire x1="35.56" y1="20.32" x2="35.56" y2="-20.32" width="0.254" layer="94"/>
+<wire x1="35.56" y1="-20.32" x2="-35.56" y2="-20.32" width="0.254" layer="94"/>
+<wire x1="-35.56" y1="-20.32" x2="-35.56" y2="20.32" width="0.254" layer="94"/>
+<text x="-35.56" y="21.59" size="1.778" layer="95">&gt;NAME</text>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="VOCORE_V10A">
+<description>&lt;b&gt;VoCore module footprint, revision 1.0a&lt;/b&gt;&lt;br /&gt;Based on: &lt;a href="http://vonger.cn/wp-content/uploads/2014/06/VoCore.v1.0a.pcb_.pdf"&gt;http://vonger.cn/wp-content/uploads/2014/06/VoCore.v1.0a.pcb_.pdf&lt;/a&gt;
+&lt;br /&gt;&lt;br /&gt;
+Found a bug? Get in touch or send a pull request at &lt;a href="https://github.com/omerk/vocore-evk"&gt;https://github.com/omerk/vocore-evk&lt;/a&gt;</description>
+<gates>
+<gate name="MOD$1" symbol="VOCORE_V10A" x="0" y="2.54"/>
+</gates>
+<devices>
+<device name="" package="VOCORE_V10A">
+<connects>
+<connect gate="MOD$1" pin="1V8_OUT" pad="W1"/>
+<connect gate="MOD$1" pin="3V3@1" pad="S13"/>
+<connect gate="MOD$1" pin="3V3@2" pad="S14"/>
+<connect gate="MOD$1" pin="GND@1" pad="N3"/>
+<connect gate="MOD$1" pin="GND@2" pad="N4"/>
+<connect gate="MOD$1" pin="GND@4" pad="S17"/>
+<connect gate="MOD$1" pin="GND@5" pad="S18"/>
+<connect gate="MOD$1" pin="GP00" pad="N9"/>
+<connect gate="MOD$1" pin="GP01/I2C_SCL" pad="N11"/>
+<connect gate="MOD$1" pin="GP02/I2C_SDA" pad="N12"/>
+<connect gate="MOD$1" pin="GP07/I2S_CLK" pad="S1"/>
+<connect gate="MOD$1" pin="GP08/I2S_WS" pad="W5"/>
+<connect gate="MOD$1" pin="GP09/I2S_SDO" pad="W3"/>
+<connect gate="MOD$1" pin="GP10/I2S_SDI" pad="S2"/>
+<connect gate="MOD$1" pin="GP11/PCM_FS" pad="S4"/>
+<connect gate="MOD$1" pin="GP12/PCM_CLK" pad="W2"/>
+<connect gate="MOD$1" pin="GP13/PCM_DRX" pad="W7"/>
+<connect gate="MOD$1" pin="GP14/PCM_DTX" pad="W11"/>
+<connect gate="MOD$1" pin="GP17/JTAG_TDO" pad="N5"/>
+<connect gate="MOD$1" pin="GP18JTAG_TDI" pad="N10"/>
+<connect gate="MOD$1" pin="GP19/JTAG_TMS" pad="N8"/>
+<connect gate="MOD$1" pin="GP20/JTAG_TCLK" pad="N7"/>
+<connect gate="MOD$1" pin="GP21/JTAG_TRST" pad="N6"/>
+<connect gate="MOD$1" pin="GP22/LED0" pad="W4"/>
+<connect gate="MOD$1" pin="GP23/LED1" pad="W6"/>
+<connect gate="MOD$1" pin="GP24/LED2" pad="W8"/>
+<connect gate="MOD$1" pin="GP25/LED3" pad="W10"/>
+<connect gate="MOD$1" pin="GP26/LED4" pad="W12"/>
+<connect gate="MOD$1" pin="GP27/SPI_CS1" pad="W9"/>
+<connect gate="MOD$1" pin="P0RN" pad="S8"/>
+<connect gate="MOD$1" pin="P0RP" pad="S7"/>
+<connect gate="MOD$1" pin="P0TN" pad="S5"/>
+<connect gate="MOD$1" pin="P0TP" pad="S6"/>
+<connect gate="MOD$1" pin="P4RN" pad="S12"/>
+<connect gate="MOD$1" pin="P4RP" pad="S11"/>
+<connect gate="MOD$1" pin="P4TN" pad="S10"/>
+<connect gate="MOD$1" pin="P4TP" pad="S9"/>
+<connect gate="MOD$1" pin="RXD2" pad="S3"/>
+<connect gate="MOD$1" pin="TXD2" pad="W13"/>
+<connect gate="MOD$1" pin="USB_M" pad="S15"/>
+<connect gate="MOD$1" pin="USB_P" pad="S16"/>
+<connect gate="MOD$1" pin="VIN@1" pad="N1"/>
+<connect gate="MOD$1" pin="VIN@2" pad="N2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
+</drawing>
+</eagle>
