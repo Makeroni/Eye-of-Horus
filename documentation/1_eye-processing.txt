@@ -8,7 +8,7 @@ from console
 w
 
 2.- If another user is to do the mousemove, you need to grant him access to your display.
-xhost +si:localuser:the-user
+xhost +si:localuser:www-data
 
 3.- shell_exec('export DISPLAY=:0.0; xdotool mousemove 20 20;')
 
