@@ -3,7 +3,7 @@ Enable mouse control from php
 0.- Tutorial
 https://gist.github.com/x8core/7a1ea039e1ccc167ac6c
 
-1.- see available devices
+1.- See available devices
 from console
 w
 

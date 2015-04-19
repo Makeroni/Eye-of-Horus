@@ -10,11 +10,20 @@ In this Example Eye of Horus takes control of the mouse pointer and plots in the
 
 ###processing_2_mouse_image
 This is a small video game where the user can move the Discovery spaceship across the Solar System
-uter screen an move
+The spaceship is controlled by the eye.
 
 ###processing_2_mouse_video
-In this Example Eye of Horus takes control of the mouse pointer and plots in the screen a circle in the point where the user is looking.
-It adds a background image of the solar system
+This example plays a video of a car running in a circuit.
+The Eye of Horus system takes control of the mouse pointer and plots in the screen a circle in the point where the user is looking.
+This can be used for tracking where the user has been looking during each moment.
+Can be used for studying the user possibilities of distraction while driving
+
+###processing_4_arduino_light_relay
+This example interacts with an arduino in order to switch on a light.
+The processing script detects when the eye is pointing the infrared LED captured by an infrared camera.
+When this happens it sends an command message using the serial port (light_on)
+On the other side the Arduino device connected to the physical light is listening in the serial port and when the command light_on appears it switch on the light.
+
 
 
 Note: in order to run this examples you will need:

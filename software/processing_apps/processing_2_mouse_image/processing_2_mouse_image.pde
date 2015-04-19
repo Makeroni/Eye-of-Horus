@@ -1,4 +1,6 @@
-int num = 60;
+PImage discovery;
+
+int num = 20;
 float mx[] = new float[num];
 float my[] = new float[num];
 PImage img;
@@ -6,7 +8,8 @@ PImage img;
 void setup() {
   size(1200, 700);
 
-  img = loadImage("back.jpg");  
+  img = loadImage("back.jpg");
+  discovery = loadImage("discovery.png");   
   
   /*
   size(displayWidth, displayHeight);
@@ -34,4 +37,5 @@ void draw() {
     //stroke(255);
     //line(width/2, height/2, mx[index], my[index]);
   }
+  image(discovery,mx[0],my[0],200,130);
 }
