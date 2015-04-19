@@ -27,7 +27,7 @@ aptitude install xdtool
 
 4.- Execute in your linux computer the command
 xhost +si:localuser:www-data
-This will allow xdotool to control our mouse
+This will allow xdotool to control our mouse.
 
 5.- Run the Eye Interface webpage that will process the images and control the mouse (you will need an apache/php server)
 
