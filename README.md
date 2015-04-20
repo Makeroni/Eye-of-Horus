@@ -291,19 +291,19 @@ We are all members of [MAKERONI LABS](http://makeronilabs.com), a non profit tha
 
 Its main purposes are:
 
-- -Promote a collaborative workspace for the development of new technologies.
+- Promote a collaborative workspace for the development of new technologies.
 
-- -Promote the dissemination of new technologies; both projects developed by members of the association, as other people. 
+- Promote the dissemination of new technologies; both projects developed by members of the association, as other people. 
 
 To fulfill these purposes are working on:
 
-- -Create and maintain a physical or virtual, collaborative work space.
+- Create and maintain a physical or virtual, collaborative work space.
 
-- -Promote and coordinate the development of technological projects for companies and individuals, by members of the association.
+- Promote and coordinate the development of technological projects for companies and individuals, by members of the association.
 
-- -Promote the capacities of members of the association in competitions, talks and exhibitions.
+- Promote the capacities of members of the association in competitions, talks and exhibitions.
 
-- -Conduct outreach to the diffusion of new technologies activities.
+- Conduct outreach to the diffusion of new technologies activities.
 
 ### Makeroni Team
 
