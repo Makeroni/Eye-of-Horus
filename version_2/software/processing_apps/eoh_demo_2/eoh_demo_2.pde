@@ -131,8 +131,11 @@ void draw()
       }
       
       //Change frequency!
-      float new_frequency = map(cal.posX, 0, 500, 200, 600);
-      change_frequency((int)new_frequency);
+      //float new_frequency = map(cal.posX*cal.posY, 0, 500, 200, 600);
+      //float new_frequency = pup.posX * pup.posY;
+      //new_frequency = map(pup.posX * pup.posY, -20000, 50000, 20, 22000);
+      //change_frequency((int)new_frequency);
+      //println("x:" + pup.posX + " y:" + pup.posX + " Hz:" + new_frequency);
     }
   }
   
@@ -141,6 +144,15 @@ void draw()
   {
     cal.info(fid);
   }
+  
+   //Change frequency!
+   //float new_frequency = map(cal.posX*cal.posY, 0, 500, 200, 600);
+   //float new_frequency = pup.posX * pup.posY;
+   //new_frequency = map(new_frequency, 2000, 5500, 20, 5000);
+   float new_frequency = pup.posX;
+   new_frequency = map(new_frequency, 50, 90, -20, 2000);
+   change_frequency((int)new_frequency);
+   println("x:" + pup.posX + " y:" + pup.posY + " Hz:" + new_frequency);
 }
 
 void keyPressed()
