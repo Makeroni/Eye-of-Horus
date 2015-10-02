@@ -130,12 +130,6 @@ void draw()
           }
       }
       
-      //Change frequency!
-      //float new_frequency = map(cal.posX*cal.posY, 0, 500, 200, 600);
-      //float new_frequency = pup.posX * pup.posY;
-      //new_frequency = map(pup.posX * pup.posY, -20000, 50000, 20, 22000);
-      //change_frequency((int)new_frequency);
-      //println("x:" + pup.posX + " y:" + pup.posX + " Hz:" + new_frequency);
     }
   }
   
@@ -146,13 +140,18 @@ void draw()
   }
   
    //Change frequency!
-   //float new_frequency = map(cal.posX*cal.posY, 0, 500, 200, 600);
-   //float new_frequency = pup.posX * pup.posY;
-   //new_frequency = map(new_frequency, 2000, 5500, 20, 5000);
-   float new_frequency = pup.posX;
-   new_frequency = map(new_frequency, 50, 90, -20, 500);
-   change_frequency((int)new_frequency);
-   println("x:" + pup.posX + " y:" + pup.posY + " Hz:" + new_frequency);
+   //float new_frequency = pup.posX;
+   //new_frequency = map(new_frequency, 50, 90, -20, 500);
+   //change_frequency((int)new_frequency);
+   //float amp = map( pup.posX, 0, 150, 1, 0 );
+   float amp = map( pup.posY, 40, 70, 1, 0 );
+   wave.setAmplitude( amp );
+  
+   //float freq = map( pup.posY, 80, 30, 20, 880 );
+   float freq = map( pup.posX, 60, 110, 20, 600 );
+   wave.setFrequency( freq );
+   
+   println("x:" + pup.posX + " y:" + pup.posY + " amp:" + amp + " freq:" + freq);
 }
 
 void keyPressed()
